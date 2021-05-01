@@ -1,12 +1,11 @@
 <template>
-  <div class="home">
-    <button type="button" class="btn btn-primary">Secondary</button>
-  </div>
+  <h1>home</h1>
 </template>
 
 <script>
-
-export default {
-  name: 'Home',
-}
+    export default {
+        name: 'Home',
+    }
 </script>
+<style>
+</style>
