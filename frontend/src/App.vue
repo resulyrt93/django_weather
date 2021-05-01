@@ -1,9 +1,8 @@
 <template>
   <div id="app">
     <div id="nav">
-      <router-link to="/">Home</router-link>
-      <router-link to="/login">About</router-link>
-      <button v-if="hasAuth" class="btn btn-info" @click="logout">Logout</button>
+      <h2>Weather Data</h2>
+      <b-button v-if="hasAuth" variant="success" @click="logout">Logout</b-button>
     </div>
     <router-view/>
   </div>
@@ -31,7 +30,7 @@
             }
         },
         computed: {
-            hasAuth () {
+            hasAuth() {
                 return this.$store.state.hasAuth
             }
         },
@@ -62,15 +61,14 @@
   }
   
   #nav {
-    padding: 30px;
+    padding: 15px;
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid #d4d2d2;
   }
   
-  #nav a {
-    font-weight: bold;
-    color: #2c3e50;
-  }
-  
-  #nav a.router-link-exact-active {
-    color: #42b983;
+  #nav h2 {
+    margin-bottom: 0;
+    font-weight: 600;
   }
 </style>
