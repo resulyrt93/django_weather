@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <div id="nav">
+    <div id="nav" class="d-flex justify-content-sm-between p-3">
       <h2>Weather Data</h2>
       <b-button v-if="hasAuth" variant="success" @click="logout">Logout</b-button>
     </div>
@@ -61,9 +61,6 @@
   }
   
   #nav {
-    padding: 15px;
-    display: flex;
-    justify-content: space-between;
     border-bottom: 1px solid #d4d2d2;
   }
   
