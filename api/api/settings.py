@@ -126,3 +126,6 @@ STATIC_URL = '/static/'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+WORLD_WEATHER_ONLINE_API_URL = 'http://api.worldweatheronline.com/premium/v1/weather.ashx'
+WORLD_WEATHER_ONLINE_API_KEY = '9cc03fb2ff1148fab02170222213004'
