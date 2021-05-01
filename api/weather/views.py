@@ -23,7 +23,7 @@ class WeatherData(APIView):
         if city is None or forecast_day is None:
             raise APIException('city and forecast_day fields are required')
 
-        if not forecast_day.isdigit() or int(forecast_day) > 5:
+        if not isinstance(forecast_day, int) or forecast_day > 5:
             raise APIException('Forecast day should be equal or less than 5')
 
         params = {

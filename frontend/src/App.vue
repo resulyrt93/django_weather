@@ -15,7 +15,6 @@
     export default {
         name: 'App',
         created: async function () {
-            console.log('created', this)
             const token = localStorage.getItem('token')
             if (token) {
                 request.defaults.headers['Authorization'] = `Token ${token}`
