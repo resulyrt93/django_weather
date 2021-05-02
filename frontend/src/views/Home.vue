@@ -43,11 +43,23 @@
               <card-right-details :current-condition="currentCondition" :today-detail="todayDetail"/>
             </div>
           </div>
-          <div class="container-fluid">
+          <div class="container-fluid" style="margin-bottom: 4px">
             <div class="row" style="padding: 2px;">
               <div class="day-weather-box" v-bind:class="forecastDay === 3 ? 'col-md-4' : 'col-md-6'" v-for="nextDay in nextDays" :key="nextDay.date">
                 <next-day-box :day-conditions="nextDay"></next-day-box>
               </div>
+            </div>
+          </div>
+          <div class="container-fluid px-0">
+            <div style="padding: 2px;">
+              <b-button class="detail-expand-button" v-b-toggle.collapse-1>Show Details</b-button>
+              <b-collapse id="collapse-1" class="mt-2">
+                <b-card class="detail-card">
+                  <div class="detail-card-container">
+                    Collapse contents Here
+                  </div>
+                </b-card>
+              </b-collapse>
             </div>
           </div>
         </div>
@@ -179,5 +191,16 @@
   
   .day-weather-box p {
     margin-bottom: 0;
+  }
+  
+  .detail-expand-button {
+    width: 100%;
+    background-color: #2E7FA1 !important;
+    color: #e0e0e0 !important;
+    font-weight: 600 !important;
+  }
+  
+  .detail-card {
+    background-color: #2E7FA1 !important;
   }
 </style>
