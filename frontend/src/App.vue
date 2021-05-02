@@ -1,8 +1,9 @@
 <template>
   <div id="app">
     <div id="nav" class="d-flex justify-content-sm-between p-3">
-      <h2>Weather Data</h2>
+      <h2><a href="/" class="header-name">Weather Data</a></h2>
       <b-button v-if="hasAuth" variant="success" @click="logout">Logout</b-button>
+      <b-button v-if="!hasAuth" variant="info" to="/register">Register</b-button>
     </div>
     <router-view/>
   </div>
@@ -37,15 +38,15 @@
         methods: {
             async logout() {
                 try {
-                    const res = await request.get(appConfig.LOGOUT_PATH)
-                    if (res.status === 200) {
-                        localStorage.setItem('token', '')
-                        request.defaults.headers['Authorization'] = ''
-                        this.$store.dispatch('clearCurrentUser')
-                        this.$router.push('/login')
-                    }
+                    await request.get(appConfig.LOGOUT_PATH)
                 } catch (e) {
                     console.log("Error : ", e)
+                } finally {
+                    localStorage.setItem('token', '')
+                    request.defaults.headers['Authorization'] = ''
+                    this.$store.dispatch('clearCurrentUser')
+                    this.$router.push('/login')
+
                 }
             }
         }
@@ -67,5 +68,10 @@
   #nav h2 {
     margin-bottom: 0;
     font-weight: 600;
+  }
+  
+  .header-name {
+    text-decoration: auto;
+    color: black;
   }
 </style>
