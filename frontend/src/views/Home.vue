@@ -148,7 +148,7 @@
   
   .card-wrapper {
     background-color: #28688C;
-    box-shadow: 1px 5px 25px 3px #444;
+    box-shadow: 1px 5px 25px 2px #444;
     border-radius: 10px;
     color: white;
     min-height: 70px;
