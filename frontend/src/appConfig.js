@@ -79,7 +79,7 @@ export const appConfig = {
         {'value': 'Kırıkkale', 'text': 'Kırıkkale'},
         {'value': 'Batman', 'text': 'Batman'},
         {'value': 'Şırnak', 'text': 'Şırnak'},
-        {'value': 'Bartın', 'text': 'Bartın'},
+        {'value': 'Bartin Turkey', 'text': 'Bartın'},
         {'value': 'Ardahan', 'text': 'Ardahan'},
         {'value': 'Iğdır', 'text': 'Iğdır'},
         {'value': 'Yalova', 'text': 'Yalova'},

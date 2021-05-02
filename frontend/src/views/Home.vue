@@ -11,8 +11,11 @@
           <div class="container card-wrapper p-3 d-flex align-items-center justify-content-center">
             <b-form-group v-slot="{ forecastRadio }">
               <div class="d-flex justify-content-center align-items-center">
-                <b-form-radio class="mr-3" v-model="forecastDay" :aria-describedby="forecastRadio" v-bind:value="3">3 Days</b-form-radio>
-                <b-form-radio v-model="forecastDay" :aria-describedby="forecastRadio" v-bind:value="5">5 Days</b-form-radio>
+                <b-form-radio class="mr-3" v-model="forecastDay" :aria-describedby="forecastRadio" v-bind:value="3">3
+                  Days
+                </b-form-radio>
+                <b-form-radio v-model="forecastDay" :aria-describedby="forecastRadio" v-bind:value="5">5 Days
+                </b-form-radio>
               </div>
             </b-form-group>
           </div>
@@ -45,7 +48,8 @@
           </div>
           <div class="container-fluid" style="margin-bottom: 4px">
             <div class="row" style="padding: 2px;">
-              <div class="day-weather-box" v-bind:class="forecastDay === 3 ? 'col-md-4' : 'col-md-6'" v-for="nextDay in nextDays" :key="nextDay.date">
+              <div class="day-weather-box" v-bind:class="forecastDay === 3 ? 'col-md-4' : 'col-md-6'"
+                   v-for="nextDay in nextDays" :key="nextDay.date">
                 <next-day-box :day-conditions="nextDay"></next-day-box>
               </div>
             </div>
@@ -56,7 +60,8 @@
               <b-collapse id="collapse-1" class="mt-2">
                 <b-card class="detail-card">
                   <div class="detail-card-container">
-                    <year-detail-chart v-if="showDetail" :chart-data="weatherData.ClimateAverages[0].month"></year-detail-chart>
+                    <year-detail-chart v-if="showDetail"
+                                       :chart-data="weatherData.ClimateAverages[0].month"></year-detail-chart>
                   </div>
                 </b-card>
               </b-collapse>
@@ -90,7 +95,9 @@
         watch: {
             forecastDay: function () {
                 this.showDetail = false
-                this.getData()
+                if (this.selectedCity) {
+                  this.getData()
+                }
             },
             selectedCity: function () {
                 this.showDetail = false
