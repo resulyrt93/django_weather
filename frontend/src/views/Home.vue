@@ -1,7 +1,7 @@
 <template>
   <div class="home-container d-flex justify-content-center py-5 row">
     <div class="col-10 col-sm-8 col-md-6">
-      <div v-if="dataLoaded" class="container home-wrapper">
+      <div v-if="dataLoaded" class="container card-wrapper">
         <div class="container-fluid current-weather">
           <div class="row">
             <div class="col-md-4 col-sm-5">
@@ -19,35 +19,7 @@
                 <p style="font-size: 1.5rem;">°C</p>
               </div>
             </div>
-            
-            <!-- Left panel -->
-            <div class="col-xs-12 col-sm-12 col-md-3 row" style="text-align: right;">
-              <div class="col-md-12 col-sm-3 col-xs-3 side-weather-info">
-                <h6>Humidity:
-                  <span>{{currentCondition.humidity}}</span>
-                  %
-                </h6>
-              </div>
-              <div class="col-md-12 col-sm-3 col-xs-3 side-weather-info">
-                <h6>Wind:
-                  <span>{{currentCondition.windspeedKmph}}</span>
-                  KMPH
-                </h6>
-              </div>
-              <div class="col-md-12 col-sm-3 col-xs-3 side-weather-info">
-                <h6>High:
-                  <span>{{todayDetail.maxtempC}}</span>
-                  °
-                </h6>
-              </div>
-              <div class="col-md-12 col-sm-3 col-xs-3 side-weather-info">
-                <h6>Low:
-                  <span>{{todayDetail.mintempC}}</span>
-                  °
-                </h6>
-              </div>
-            </div>
-          
+            <card-right-details :current-condition="currentCondition" :today-detail="todayDetail"/>
           </div>
         </div>
         <div class="container-fluid">
@@ -65,10 +37,11 @@
 <script>
     import useWeather from "../hooks/weatherData";
     import NextDayBox from "../components/NextDayBox";
+    import CardRightDetails from "../components/CardRightDetails";
 
     export default {
         name: 'Home',
-        components: {NextDayBox},
+        components: {CardRightDetails, NextDayBox},
         data: () => {
             return {
                 dataLoaded: false,
@@ -122,17 +95,11 @@
     opacity: 1;
   }
   
-  .active {
-    color: white;
-    text-decoration: none;
-    opacity: 1;
-  }
-  
   body {
     background-color: #F4F6F7;
   }
   
-  .home-wrapper {
+  .card-wrapper {
     background-color: #28688C;
     box-shadow: 1px 5px 25px 3px #444;
     border-radius: 10px;
@@ -165,9 +132,5 @@
   
   .day-weather-box p {
     margin-bottom: 0;
-  }
-  
-  .side-weather-info {
-    padding: 0px 10px;
   }
 </style>
