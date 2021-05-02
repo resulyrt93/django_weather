@@ -64,6 +64,22 @@
                                        :chart-data="weatherData.ClimateAverages[0].month"></year-detail-chart>
                   </div>
                 </b-card>
+                <b-card class="detail-card mt-2">
+                  <div class="detail-card-container row">
+                    <div class="col-12 col-md-6">
+                      <h6>Cloudcover: {{currentCondition.cloudcover}}%</h6>
+                      <h6>Feels Like: {{currentCondition.FeelsLikeC}}°C</h6>
+                      <h6>Observation Time: {{currentCondition.observation_time}}</h6>
+                      <h6>Pressure: {{currentCondition.pressure}} Bar</h6>
+                    </div>
+                    <div class="col-12 col-md-6">
+                      <h6>UV Index: {{currentCondition.uvIndex}}</h6>
+                      <h6>visibility: {{currentCondition.visibility}}%</h6>
+                      <h6>Wind Degree: {{currentCondition.winddirDegree}}°</h6>
+                      <h6>Wind Direction: {{currentCondition.winddir16Point}}</h6>
+                    </div>
+                  </div>
+                </b-card>
               </b-collapse>
             </div>
           </div>
