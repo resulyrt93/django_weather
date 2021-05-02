@@ -1,6 +1,6 @@
 <template>
   <div class="home-container d-flex justify-content-center py-5 row">
-    <div class="col-10 col-sm-8 col-md-6">
+    <div class="col-11 col-sm-10 col-md-9 col-xl-7">
       <div class="row">
         <div class="col-12 col-md-7">
           <div class="container card-wrapper p-3">
@@ -52,11 +52,11 @@
           </div>
           <div class="container-fluid px-0">
             <div style="padding: 2px;">
-              <b-button class="detail-expand-button" v-b-toggle.collapse-1>Show Details</b-button>
+              <b-button class="detail-expand-button" @click="toggleDetail" v-b-toggle.collapse-1>Show Details</b-button>
               <b-collapse id="collapse-1" class="mt-2">
                 <b-card class="detail-card">
                   <div class="detail-card-container">
-                    Collapse contents Here
+                    <year-detail-chart v-if="showDetail" :chart-data="weatherData.ClimateAverages[0].month"></year-detail-chart>
                   </div>
                 </b-card>
               </b-collapse>
@@ -73,23 +73,27 @@
     import NextDayBox from "../components/NextDayBox";
     import CardRightDetails from "../components/CardRightDetails";
     import {appConfig} from "../appConfig";
+    import YearDetailChart from "../components/YearDetailChart";
 
     export default {
         name: 'Home',
-        components: {CardRightDetails, NextDayBox},
+        components: {YearDetailChart, CardRightDetails, NextDayBox},
         data: function () {
             return {
                 dataLoaded: false,
                 forecastDay: 3,
                 selectedCity: null,
-                weatherData: {}
+                weatherData: {},
+                showDetail: false
             }
         },
         watch: {
             forecastDay: function () {
+                this.showDetail = false
                 this.getData()
             },
             selectedCity: function () {
+                this.showDetail = false
                 this.getData()
             }
         },
@@ -124,6 +128,9 @@
                 this.dataLoaded = false
                 this.weatherData = await useWeather(this.forecastDay, this.selectedCity)
                 this.dataLoaded = true
+            },
+            toggleDetail() {
+                this.showDetail = !this.showDetail
             }
         }
     }
