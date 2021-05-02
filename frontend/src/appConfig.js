@@ -5,6 +5,7 @@ export const appConfig = {
     LOGOUT_PATH: 'logout/',
     WEATHER_DATA_PATH: 'weather/weather-data/',
     TURKEY_CITIES: [
+        { value: null, text: 'Please select a city' },
         {'value': 'Adana', 'text': 'Adana'},
         {'value': 'Adiyaman', 'text': 'Adıyaman'},
         {'value': 'Afyonkarahisar', 'text': 'Afyonkarahisar'},

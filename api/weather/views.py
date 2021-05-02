@@ -26,9 +26,13 @@ class WeatherData(APIView):
         if not isinstance(forecast_day, int) or forecast_day > 5:
             raise APIException('Forecast day should be equal or less than 5')
 
+        # since today is zero index, we should add more day to parameter
+        forecast_day = forecast_day + 1
+
         params = {
             'format': 'json',
             'num_of_days': forecast_day,
+            'showlocaltime': 'yes',
             'q': city,
             'key': settings.WORLD_WEATHER_ONLINE_API_KEY
         }

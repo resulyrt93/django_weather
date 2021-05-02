@@ -1,12 +1,26 @@
 <template>
   <div class="home-container d-flex justify-content-center py-5 row">
     <div class="col-10 col-sm-8 col-md-6">
-      <div class="container card-wrapper p-3">
-        <b-form-select v-model="selectedCity" :options="cities" @change="getData"></b-form-select>
+      <div class="row">
+        <div class="col-12 col-md-7">
+          <div class="container card-wrapper p-3">
+            <b-form-select v-model="selectedCity" :options="cities"></b-form-select>
+          </div>
+        </div>
+        <div class="col-12 col-md-5 mt-3 mt-md-0">
+          <div class="container card-wrapper p-3 d-flex align-items-center justify-content-center">
+            <b-form-group v-slot="{ forecastRadio }">
+              <div class="d-flex justify-content-center align-items-center">
+                <b-form-radio class="mr-3" v-model="forecastDay" :aria-describedby="forecastRadio" v-bind:value="3">3 Days</b-form-radio>
+                <b-form-radio v-model="forecastDay" :aria-describedby="forecastRadio" v-bind:value="5">5 Days</b-form-radio>
+              </div>
+            </b-form-group>
+          </div>
+        </div>
       </div>
-      <div class="card-wrapper mt-4 d-flex justify-content-center align-items-center main-card">
+      <div v-if="selectedCity" class="card-wrapper mt-4 d-flex justify-content-center align-items-center main-card">
         <b-spinner v-if="!dataLoaded" label="Spinning"></b-spinner>
-        <div v-if="dataLoaded && selectedCity" class="container p-2">
+        <div v-if="dataLoaded" class="container p-2">
           <div v-if="dataLoaded" class="container-fluid current-weather">
             <div class="row">
               <div class="col-md-4 col-sm-5">
@@ -31,7 +45,7 @@
           </div>
           <div class="container-fluid">
             <div class="row" style="padding: 2px;">
-              <div class="col-md-4 day-weather-box" v-for="nextDay in nextDays" :key="nextDay.date">
+              <div class="day-weather-box" v-bind:class="forecastDay === 3 ? 'col-md-4' : 'col-md-6'" v-for="nextDay in nextDays" :key="nextDay.date">
                 <next-day-box :day-conditions="nextDay"></next-day-box>
               </div>
             </div>
@@ -51,12 +65,20 @@
     export default {
         name: 'Home',
         components: {CardRightDetails, NextDayBox},
-        data: () => {
+        data: function () {
             return {
                 dataLoaded: false,
-                forecastDay: 4,
-                selectedCity: '',
+                forecastDay: 3,
+                selectedCity: null,
                 weatherData: {}
+            }
+        },
+        watch: {
+            forecastDay: function () {
+                this.getData()
+            },
+            selectedCity: function () {
+                this.getData()
             }
         },
         computed: {
@@ -85,15 +107,10 @@
                 return appConfig.TURKEY_CITIES
             }
         },
-        created: async function () {
-            // const _weatherData = await this.getData(4, this.selectedCity)
-            // this.weatherData = _weatherData
-            this.dataLoaded = true
-        },
         methods: {
-            async getData(city) {
+            async getData() {
                 this.dataLoaded = false
-                this.weatherData = await useWeather(this.forecastDay, city)
+                this.weatherData = await useWeather(this.forecastDay, this.selectedCity)
                 this.dataLoaded = true
             }
         }
@@ -122,6 +139,11 @@
     box-shadow: 1px 5px 25px 3px #444;
     border-radius: 10px;
     color: white;
+    min-height: 70px;
+  }
+  
+  .card-wrapper .form-group {
+    margin-bottom: 0;
   }
   
   .current-weather {
@@ -141,7 +163,7 @@
     margin-top: 10px;
     text-align: center;
     display: -webkit-box;
-    overflow : hidden;
+    overflow: hidden;
     text-overflow: ellipsis;
     max-width: 150px;
     -webkit-line-clamp: 1;
